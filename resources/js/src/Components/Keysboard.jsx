@@ -1,11 +1,23 @@
-import React, { useState, useRef } from 'react';
-import { Card, CardBody, Col, Container, Input, Label, Row, Button, Form, FormFeedback, Alert } from 'reactstrap';
+import React, { useState, useRef } from "react";
+import {
+    Card,
+    CardBody,
+    Col,
+    Container,
+    Input,
+    Label,
+    Row,
+    Button,
+    Form,
+    FormFeedback,
+    Alert,
+} from "reactstrap";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import './index.css'
-import Keyboard from 'react-simple-keyboard';
-import 'react-simple-keyboard/build/css/index.css';
+import "./index.css";
+import Keyboard from "react-simple-keyboard";
+import "react-simple-keyboard/build/css/index.css";
 const Keysboard = () => {
     const [userLogin, setUserLogin] = useState([]);
     const [error, setError] = useState();
@@ -15,7 +27,7 @@ const Keysboard = () => {
     const [inputName, setInputName] = useState("default");
     const keyboard = useRef();
 
-    const onChangeAll = inputs => {
+    const onChangeAll = (inputs) => {
         /**
          * Here we spread the inputs into a new object
          * If we modify the same object, react will not trigger a re-render
@@ -29,7 +41,7 @@ const Keysboard = () => {
         setLayoutName(newLayoutName);
     };
 
-    const onKeyPress = button => {
+    const onKeyPress = (button) => {
         console.log("Button pressed", button);
 
         /**
@@ -38,26 +50,26 @@ const Keysboard = () => {
         if (button === "{shift}" || button === "{lock}") handleShift();
     };
 
-    const onChangeInput = event => {
+    const onChangeInput = (event) => {
         const inputVal = event.target.value;
 
         setInputs({
             ...inputs,
-            [inputName]: inputVal
+            [inputName]: inputVal,
         });
 
         keyboard.current.setInput(inputVal);
     };
 
-    const getInputValue = inputName => {
+    const getInputValue = (inputName) => {
         return inputs[inputName] || "";
     };
     const validation = useFormik({
         enableReinitialize: true,
 
         initialValues: {
-            email: userLogin.email || "admin@gmail.com" || '',
-            password: userLogin.password || "1234" || '',
+            email: userLogin.email || "admin@gmail.com" || "",
+            password: userLogin.password || "1234" || "",
         },
         validationSchema: Yup.object({
             email: Yup.string().required("Please Enter Your Email"),
@@ -65,9 +77,10 @@ const Keysboard = () => {
         }),
         onSubmit: (values) => {
             dispatch(loginUser(values, props.history));
-        }
+        },
     });
-    const logoLight = "https://files.logoscdn.com/v1/files/44811985/content.svg?signature=yCSOkj6FQ0aABNCXOh2LskQULa4"
+    const logoLight =
+        "https://files.logoscdn.com/v1/files/44811985/content.svg?signature=yCSOkj6FQ0aABNCXOh2LskQULa4";
     return (
         <div className="App">
             {/*          <input
@@ -79,15 +92,16 @@ const Keysboard = () => {
             /> */}
             <div className="auth-page-content">
                 <Container>
-
                     <Row className="justify-content-center">
                         <Col md={8} lg={6} xl={5}>
-                            <Card className="mt-4 shadow-lg rounded-xl border-6" >
+                            <Card className="mt-4 shadow-lg rounded-xl border-6">
                                 <CardBody className="p-4">
                                     <div className="text-center mt-2">
                                         <img src={logoLight} />
                                     </div>
-                                    {error && error ? (<Alert color="danger"> {error} </Alert>) : null}
+                                    {error && error ? (
+                                        <Alert color="danger"> {error} </Alert>
+                                    ) : null}
                                     <div className="p-2 mt-4">
                                         <Form
                                             onSubmit={(e) => {
@@ -95,72 +109,118 @@ const Keysboard = () => {
                                                 validation.handleSubmit();
                                                 return false;
                                             }}
-                                            action="#">
-
+                                            action="#"
+                                        >
                                             <div className="mb-3">
-                                                <Label htmlFor="email" className="form-label">Email</Label>
+                                                <Label
+                                                    htmlFor="email"
+                                                    className="form-label"
+                                                >
+                                                    Usuario
+                                                </Label>
                                                 <Input
                                                     name="email"
-                                                    className="form-control shadow-lg rounded-pill"
-                                                    placeholder="Enter email"
+                                                    className="form-control shadow-lg "
                                                     type="email"
-                                                    value={getInputValue("firstName")}
-                                                    onFocus={() => setInputName("firstName")}
+                                                    value={getInputValue(
+                                                        "firstName"
+                                                    )}
+                                                    onFocus={() =>
+                                                        setInputName(
+                                                            "firstName"
+                                                        )
+                                                    }
                                                     onChange={onChangeInput}
-                                                /*             onChange={validation.handleChange}
+                                                    /*             onChange={validation.handleChange}
                                                             onBlur={validation.handleBlur}
                                                             value={validation.values.email || ""}
                                                             invalid={
                                                                 validation.touched.email && validation.errors.email ? true : false
                                                             } */
                                                 />
-                                                {validation.touched.email && validation.errors.email ? (
-                                                    <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
+                                                {validation.touched.email &&
+                                                validation.errors.email ? (
+                                                    <FormFeedback type="invalid">
+                                                        {
+                                                            validation.errors
+                                                                .email
+                                                        }
+                                                    </FormFeedback>
                                                 ) : null}
                                             </div>
 
                                             <div className="mb-3">
-                                                <div className="float-end">
-                                                    <Link to="/forgot-password" className="text-muted">Olvidaste tu contraseña?</Link>
-                                                </div>
-                                                <Label className="form-label" htmlFor="password-input">Password</Label>
+                                                <Label
+                                                    className="form-label"
+                                                    htmlFor="password-input"
+                                                >
+                                                    Contraseña
+                                                </Label>
                                                 <div className="position-relative auth-pass-inputgroup mb-3">
                                                     <Input
                                                         name="password"
                                                         /*                 value={validation.values.password || ""} */
                                                         type="password"
-                                                        className="form-control pe-5 shadow-lg rounded-pill"
+                                                        className="form-control pe-5 shadow-lg "
                                                         placeholder="******"
-                                                        value={getInputValue("lastName")}
-                                                        onFocus={() => setInputName("lastName")}
-
+                                                        value={getInputValue(
+                                                            "lastName"
+                                                        )}
+                                                        onFocus={() =>
+                                                            setInputName(
+                                                                "lastName"
+                                                            )
+                                                        }
                                                         onChange={onChangeInput}
-                                                    /*                onChange={validation.handleChange}
+                                                        /*                onChange={validation.handleChange}
                                                                    onBlur={validation.handleBlur}
                                                                    invalid={
                                                                        validation.touched.password && validation.errors.password ? true : false
                                                                    } */
                                                     />
-                                                    {validation.touched.password && validation.errors.password ? (
-                                                        <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                                                    {validation.touched
+                                                        .password &&
+                                                    validation.errors
+                                                        .password ? (
+                                                        <FormFeedback type="invalid">
+                                                            {
+                                                                validation
+                                                                    .errors
+                                                                    .password
+                                                            }
+                                                        </FormFeedback>
                                                     ) : null}
-                                                    <button className="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i className="mdi mdi-eye-outline fs-4 align-middle"></i></button>
                                                 </div>
                                             </div>
 
                                             <div className="form-check">
-                                                <Input className="form-check-input" type="checkbox" value="" id="auth-remember-check" />
-                                                <Label className="form-check-label" htmlFor="auth-remember-check">Recordar me</Label>
+                                                <Input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    value=""
+                                                    id="auth-remember-check"
+                                                />
+                                                <Label
+                                                    className="form-check-label"
+                                                    htmlFor="auth-remember-check"
+                                                >
+                                                    Recordar me
+                                                </Label>
                                             </div>
 
                                             <div className="mt-4">
-                                                <Button className="btn  w-100 shadow-lg rounded-pill btn-blue" type="submit">Iniciar sesión</Button>
+                                                <Link
+                                                    to="/LoginCover"
+                                                    className="btn btn-info w-100 shadow-lg  btn-blue"
+                                                    type="submit"
+                                                >
+                                                    Iniciar sesión
+                                                </Link>
                                             </div>
                                         </Form>
                                     </div>
                                 </CardBody>
                             </Card>
-
                         </Col>
                     </Row>
                 </Container>
@@ -175,15 +235,14 @@ const Keysboard = () => {
 
             <div className="see-keyboard">
                 <Keyboard
-                    keyboardRef={r => (keyboard.current = r)}
+                    keyboardRef={(r) => (keyboard.current = r)}
                     inputName={inputName}
                     layoutName={layoutName}
                     onChangeAll={onChangeAll}
                     onKeyPress={onKeyPress}
-
                 />
             </div>
         </div>
     );
-}
-export default Keysboard
+};
+export default Keysboard;
