@@ -51,10 +51,10 @@ const KeyBoard = () => {
                                 </Row>
                                 <Row className='my-1 py-2'>
                                     <Row>
-                                        <Col lg={4}>
+                                        <Col lg={4} sm={4}>
                                             <Button onClick={() => captureKeys(KeysBoards[9])} color='dark' outline className='py-3 px-4 border-1 shadow-lg rounded border'><span className='fs-4 fw-bold'>{KeysBoards[9].key}</span></Button>
                                         </Col>
-                                        <Col lg={8}>
+                                        <Col lg={8} sm={7}>
                                             <Button color='danger' className='py-3 px-4 border-1 shadow-lg rounded border w-100 '><span className='fs-4 fw-bold'>Borrar</span></Button>
 
                                         </Col>
@@ -68,8 +68,8 @@ const KeyBoard = () => {
 
                                 </Row>
                             </Col>
-                            <Col lg={4} >
-                                <Button className='h-100 w-75 '><span className='fw-bold fs-3'>Enter</span></Button>
+                            <Col lg={4}>
+                                <Button className='h-100 w-75 mt-sm-2 w-sm-100'><span className='fw-bold fs-3'>Enter</span></Button>
                             </Col>
                         </Row>
                     </Container>
