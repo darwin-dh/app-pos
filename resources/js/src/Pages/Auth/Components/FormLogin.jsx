@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Label, Input, Col, Button } from 'reactstrap'
 const FormLogin = () => {
     return (
@@ -25,7 +26,7 @@ const FormLogin = () => {
 
 
                         <div className="mt-4">
-                            <Button  className="w-100" type="submit">Iniciar Sección</Button>
+                            <Link  to='/' className="btn btn-info w-100" type="submit">Iniciar Sección</Link>
                         </div>
                     </form>
                 </div>
